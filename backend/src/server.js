@@ -10,14 +10,12 @@ dotenv.config();
 const PORT=process.env.PORT || 5000
 
 app.use(express.json());
-
 app.use(rateLimiter);
-
 app.use("/api/notes",notesRoute)
 
-connectDB();
-
-app.listen(PORT, ()=>{
-    console.log("Server running at port:",PORT);
-});
+connectDB().then(()=>{
+    app.listen(PORT, ()=>{
+        console.log("Server running at port:",PORT);
+    });
+})
 
